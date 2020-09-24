@@ -1,0 +1,22 @@
+#Дано(для простоты оставлены только нужные для селекта ключи):
+
+user_list:
+- name: core
+ssh_keys:
+- name: main
+type: "ecdsa-sha2-nistp256"
+value: "AAAA..."
+
+#Нужно получить:
+
+pubkey: "ecdsa-sha2-nistp256 AAAA....."
+
+#Как это в итоге получилось, для переменной в hostvars:
+
+pubkey: "{% set core_main_ssh_params =
+user_list |
+selectattr('name', 'equalto', 'core') |
+sum(attribute='ssh_keys', start=[]) |
+selectattr('name', 'equalto', 'main') |
+list | first -%}
+{{ core_main_ssh_params.type }} {{ core_main_ssh_params.value }}"
