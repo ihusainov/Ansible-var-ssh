@@ -1,4 +1,3 @@
-#Дано(для простоты оставлены только нужные для селекта ключи):
 
 user_list:
 - name: core
@@ -7,11 +6,10 @@ ssh_keys:
 type: "ecdsa-sha2-nistp256"
 value: "AAAA..."
 
-#Нужно получить:
-
+#Needs get:
 pubkey: "ecdsa-sha2-nistp256 AAAA....."
 
-#Как это в итоге получилось, для переменной в hostvars:
+#How did it end up, for the variable hostvars:
 
 pubkey: "{% set core_main_ssh_params =
 user_list |
